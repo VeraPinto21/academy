@@ -29,9 +29,6 @@ jobs:
         cache: maven
     - name: Build
       uses: ./.github/actions/maven_build
-    - name: Create DockerImage
-      run: |
-        docker build . --file Dockerfile --tag academy:$(date +%s)
-        docker image ls
-    - name: Check if image created
-      run: docker image ls
+    - name: Docker build
+      uses: ./.github/actions/docker_build
+
