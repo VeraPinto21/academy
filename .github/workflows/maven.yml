@@ -53,16 +53,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-
-    - name: Install dependencies
-      run: npm ci
-
-    - name: Connect to PostgreSQL
-      run: node client.js
-      env:
-        POSTGRES_HOST: localhost
-        POSTGRES_PORT: 5432
-
+  
     - name: Maven Build
       uses: ./.github/actions/maven_build
 
