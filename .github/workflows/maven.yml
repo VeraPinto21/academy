@@ -41,7 +41,7 @@ jobs:
         tag_name: ${{env.docker_tag_name}}
 
     - name: Save for file
-      run: docker save -o ${{env.docker_image_name}}.tar ${{env.docker_image_name}}:${{env.docker_tag_name}}
+      run: docker save -o "${{env.docker_image_name}}.tar" ${{env.docker_image_name}}:${{env.docker_tag_name}}
 
     - name: Upload File
       uses: actions/upload-artifact@v4
@@ -56,8 +56,6 @@ jobs:
       - uses: actions/download-artifact@4
         with:
           name: ${{env.artifact_name}}
-      - name: Display structure of downloaded files
-        run: ls -R
       - run: docker load -i ${{env.docker_image_name}}.tar
       - name: Docker Image
         run: docker image ls
