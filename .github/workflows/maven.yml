@@ -35,3 +35,9 @@ jobs:
         image_name: 'academy'
         tag_name: 'vp'
 
+  dockerimage:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Docker Image
+        run: docker image ls

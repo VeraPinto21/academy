@@ -1,5 +1,5 @@
-name: Replace-With-Your-Action-Name
-description: Replace-With-Your-Action-Description
+name: Build Docker
+description: "Build Docker image "
 inputs:
  path_dockerfile:
     description: "Path to the Dockerfile"
@@ -22,5 +22,4 @@ runs:
             export TAG="${{ inputs.tag_name }}"
         fi
         docker build . --file ${{ inputs.path_dockerfile }} --tag ${{ inputs.image_name }}:$TAG
-        docker image ls
       shell: bash
