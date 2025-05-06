@@ -46,4 +46,4 @@ jobs:
       - name: Docker Image
         run: docker image ls
       - name: Save for file
-        run: docker save -o ${{env.Docker_Image_Name}}.tar ${{env.Docker_Image_Name}}
+        run: docker save -o ${{env.Docker_Image_Name}}.tar ${{env.Docker_Image_Name}}:${{env.Docker_Tag_Name}}
