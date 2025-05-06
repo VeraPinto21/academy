@@ -27,7 +27,7 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
-    - name: Build
+    - name: Maven Build
       uses: ./.github/actions/maven_build
     - name: Docker build
       uses: ./.github/actions/docker_build
