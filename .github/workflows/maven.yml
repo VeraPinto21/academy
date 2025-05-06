@@ -86,6 +86,7 @@ jobs:
   checkImages:
     runs-on: ubuntu-latest
     needs: build
+    environment: ${{inputs.environment}}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
