@@ -21,17 +21,20 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
+
+
+
     - name: Maven Build
       uses: ./.github/actions/maven_build
     - name: Docker build
@@ -49,13 +52,30 @@ jobs:
         name: ${{env.artifact_name}}
         path: ${{env.docker_image_name}}.tar
 
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Push Docker
+      uses: ./.github/actions/docker_push
+      with:
+        docker_hub_username: ${{secrets.DOCKERHUB_USERNAME}}
+        docker_image: "${{env.docker_image_name}}:latest"
+
   checkImages:
     runs-on: ubuntu-latest
     needs: build
     steps:
+
       - uses: actions/download-artifact@v4
         with:
           name: ${{env.artifact_name}}
       - run: docker load -i ${{env.docker_image_name}}.tar
       - name: Docker Image
         run: docker image ls
+
+
+
+
