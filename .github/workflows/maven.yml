@@ -21,16 +21,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Custom Action
-      uses: ./.github/actions/maven_build
     - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+    - name: Build
+      uses: ./.github/actions/maven_build
     - name: Create DockerImage
       run: |
         docker build . --file Dockerfile --tag academy:$(date +%s)

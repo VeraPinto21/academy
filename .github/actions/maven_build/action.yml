@@ -4,5 +4,7 @@ runs:
   using: composite
   steps:
     - run: |
-        echo "Update me with the necessary commands"
+        echo "Building"
       shell: bash
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
