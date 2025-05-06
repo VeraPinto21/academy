@@ -38,12 +38,12 @@ jobs:
       with:
         image_name: $Docker_Image_Name
         tag_name: $Docker_Tag_Name
+    - name: Save for file
+      run: docker save -o ${{env.Docker_Image_Name}}.tar ${{env.Docker_Image_Name}}:${{env.Docker_Tag_Name}}
 
-  dockerimage:
+  checkImages:
     runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Docker Image
         run: docker image ls
-      - name: Save for file
-        run: docker save -o ${{env.Docker_Image_Name}}.tar ${{env.Docker_Image_Name}}:${{env.Docker_Tag_Name}}
