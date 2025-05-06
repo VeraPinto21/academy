@@ -41,7 +41,7 @@ jobs:
         tag_name: ${{env.docker_tag_name}}
     - name: Save for file
       run: docker save -o ${{env.docker_image_name}}.tar ${{env.docker_image_name}}:${{env.docker_tag_name}}
-    - run: mkdir -p path/to/artifact
+    - run: mkdir -p path/to/${{env.artifact_name}}
     - run: echo hello > path/to/${{env.artifact_name}}/world.txt
     - uses: actions/upload-artifact@v4
       with:
